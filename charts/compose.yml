@@ -1,0 +1,25 @@
+influxdb:
+  image: tutum/influxdb:latest
+  env:
+    PRE_CREATE_DB: docker
+    UDP_DB: docker
+  expose:
+    - 8086
+    - 8083
+    - 4444
+  volume:
+    - /var/influxdb:/data
+  ports:
+    - "8086:8086"
+    - "8083:8083"
+    - "4444:4444/udp"
+grafana:
+  image: grafana/grafana:latest
+  env:
+    GF_DASHBOARDS_JSON_ENABLE: true
+  ports:
+    - "3000:3000"
+  volumes:
+    - /var/lib/grafana:/var/lib/grafana
+    - ../docker-dashboard.json:/var/lib/grafana/dashboards/docker-dashboard.json
+
