@@ -1,0 +1,508 @@
+{
+  "id": 1,
+  "title": "docker",
+  "originalTitle": "docker",
+  "tags": [],
+  "style": "dark",
+  "timezone": "utc",
+  "editable": true,
+  "hideControls": true,
+  "sharedCrosshair": true,
+  "rows": [
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "500px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "docker",
+          "decimals": 0,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "height": "",
+          "id": 1,
+          "leftYAxisLabel": "count",
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "rightYAxisLabel": "",
+          "seriesOverrides": [
+            {
+              "alias": "vmrss",
+              "yaxis": 2
+            },
+            {
+              "alias": "vmsize",
+              "yaxis": 2
+            },
+            {
+              "alias": "rss",
+              "yaxis": 2
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "last",
+                  "name": "containers"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "docker",
+              "query": "SELECT last(\"containers\") AS \"containers\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "rawQuery": false,
+              "refId": "A",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "last",
+                  "name": "dirs"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "docker",
+              "query": "SELECT last(\"dirs\") AS \"dirs\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "A",
+              "tags": [],
+              "target": ""
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "last",
+                  "name": "goroutines"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "hide": false,
+              "measurement": "docker",
+              "query": "SELECT last(\"goroutines\") AS \"goroutines\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "A",
+              "tags": [],
+              "target": ""
+            },
+            {
+              "alias": "threads",
+              "fields": [
+                {
+                  "func": "last",
+                  "name": "threads"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "docker",
+              "query": "SELECT last(\"threads\") AS \"threads\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "A",
+              "tags": [],
+              "target": ""
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "last",
+                  "name": "images"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "hide": true,
+              "measurement": "docker",
+              "query": "SELECT last(\"images\") AS \"images\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "B",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "last",
+                  "mathExpr": "",
+                  "name": "rss"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "docker",
+              "query": "SELECT last(\"rss\") AS \"rss\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "C",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "last",
+                  "mathExpr": "/1000",
+                  "name": "vmsize"
+                }
+              ],
+              "fill": "",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "docker",
+              "query": "SELECT last(\"vmsize\")/1000 AS \"vmsize\" FROM \"docker\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "D",
+              "tags": []
+            },
+            {
+              "alias": "$col [s]",
+              "fields": [
+                {
+                  "func": "last",
+                  "name": "duration"
+                }
+              ],
+              "fill": "previous",
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "events",
+              "query": "SELECT last(\"duration\") AS \"duration\" FROM \"events\" WHERE $timeFilter GROUP BY time($interval) fill(previous)",
+              "refId": "E",
+              "tags": []
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "docker",
+          "tooltip": {
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "kbytes"
+          ]
+        }
+      ],
+      "title": "Row"
+    },
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "350px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "docker",
+          "decimals": 0,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 2,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": true,
+          "steppedLine": true,
+          "targets": [
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "mean",
+                  "name": "gomaxprocs"
+                }
+              ],
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "sched",
+              "query": "SELECT mean(\"gomaxprocs\") AS \"gomaxprocs\" FROM \"sched\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "A",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "mean",
+                  "name": "idleprocs"
+                }
+              ],
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "sched",
+              "query": "SELECT mean(\"idleprocs\") AS \"idleprocs\" FROM \"sched\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "B",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "mean",
+                  "name": "idlethreads"
+                }
+              ],
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "sched",
+              "query": "SELECT mean(\"idlethreads\") AS \"idlethreads\" FROM \"sched\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "C",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "mean",
+                  "name": "runqueue"
+                }
+              ],
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "sched",
+              "query": "SELECT mean(\"runqueue\") AS \"runqueue\" FROM \"sched\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "D",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "mean",
+                  "name": "spinningthreads"
+                }
+              ],
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "sched",
+              "query": "SELECT mean(\"spinningthreads\") AS \"spinningthreads\" FROM \"sched\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "E",
+              "tags": []
+            },
+            {
+              "alias": "$col",
+              "fields": [
+                {
+                  "func": "mean",
+                  "name": "threads"
+                }
+              ],
+              "groupBy": [
+                {
+                  "interval": "auto",
+                  "type": "time"
+                }
+              ],
+              "measurement": "sched",
+              "query": "SELECT mean(\"threads\") AS \"threads\" FROM \"sched\" WHERE $timeFilter GROUP BY time($interval)",
+              "refId": "F",
+              "tags": []
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "sched",
+          "tooltip": {
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ]
+        }
+      ],
+      "title": "New row"
+    }
+  ],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {
+    "now": true,
+    "refresh_intervals": [
+      "1s",
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": [
+      {
+        "datasource": "docker",
+        "enable": false,
+        "iconColor": "#C0C6BE",
+        "iconSize": 15,
+        "lineColor": "rgba(255, 96, 96, 0.592157)",
+        "name": "message",
+        "query": "select * from events where $timeFilter",
+        "showLine": true,
+        "tagsColumn": "tags",
+        "textColumn": "duration",
+        "titleColumn": "message"
+      }
+    ]
+  },
+  "refresh": false,
+  "schemaVersion": 7,
+  "version": 26,
+  "links": []
+}
