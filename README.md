@@ -35,7 +35,12 @@ DOCKER_LOG="/home/ppalucki/work/go15/src/github.com/docker/docker.log" DOCKER_HO
 - spinningthreads
 
 
+### example grafana dashboard 
 
+
+[here](docker-dashboard.json)
+
+![](grafana-dashboard.png)
 
 
 
